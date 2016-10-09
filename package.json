@@ -1,0 +1,19 @@
+{
+  "name": "flicks",
+  "version": "1.0.0",
+  "description": "simple wrapper for movie images",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "ejs": "^2.5.2",
+    "express": "^4.14.0",
+    "gm": "^1.23.0",
+    "path-exists": "^3.0.0",
+    "sequelize": "^3.24.3",
+    "synchronize": "^2.0.0"
+  }
+}
