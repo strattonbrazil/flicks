@@ -8,11 +8,15 @@ var pathExists = require('path-exists');
 var http = require('http');
 var url = require('url');
 const path = require('path');
-const im = require('imagemagick');
+// const im = require('imagemagick');
 const gm = require('gm');
 const sync = require('synchronize');
 
 const DEV_IMAGE_PORT = 9011;
+
+app.use('/public', express.static('static'));
+
+
 
 // make sure files/directories configured correctly
 //
@@ -45,7 +49,7 @@ for (var i = 0; i < movieMetadata.movies.length; i++) {
     let movie = movieMetadata.movies[i];
     movieByEncodedTitle[movie["title_encoded"]] = movie;
 
-    let movieDir = path.join(picsDir, movie['title_encoded'], "hq")    
+    let movieDir = path.join(picsDir, movie['title_encoded'], "hq")
     let moviePreviewDir = path.join(picsDir, movie['title_encoded'], "preview");
     if (!pathExists.sync(moviePreviewDir)) {
         console.log("creating previews for '" + movie['title_encoded']);
@@ -56,11 +60,11 @@ for (var i = 0; i < movieMetadata.movies.length; i++) {
         console.log("creating thumbnails for '" + movie['title_encoded']);
         fs.mkdir(movieThumbnailDir);
     }
-    
+
     if (!pathExists.sync(movieDir)) {
         console.warn("unable to find pic for for '" + movie['title_encoded'] + "', skipping");
         continue;
-    }    
+    }
     let files = fs.readdirSync(movieDir);
     movie['previewPaths'] = [];
     movie['thumbnailPaths'] = [];
@@ -71,7 +75,7 @@ for (var i = 0; i < movieMetadata.movies.length; i++) {
         previewPath = previewPath.replace(".png", ".jpg");
         let thumbnailPath = path.join(movieThumbnailDir, file);
         thumbnailPath = thumbnailPath.replace(".png", ".jpg");
-        
+
         // create the preview if not present
         if (!pathExists.sync(previewPath)) {
             sync.fiber(function() {
@@ -112,6 +116,7 @@ app.get('/m/:movie', function (req, res) {
             cdnBase: cdnBase,
             movie: movieByEncodedTitle[movie]
         });
+        console.log(movieByEncodedTitle[movie]);
     } else {
         res.redirect('/'); // TODO: send to error page?
     }
@@ -128,7 +133,7 @@ function onRequestFile(req, res) {
     console.log(filePath);
     if (pathExists.sync(filePath)) {
         fs.readFile(filePath, "binary", function(err, file) {
-            if (err) {        
+            if (err) {
                 res.writeHead(500, {"Content-Type": "text/plain"});
                 res.write(err + "\n");
                 res.end();

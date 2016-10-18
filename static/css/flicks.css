@@ -1,0 +1,9 @@
+.seek-bar    {
+    width: 900px;
+    height: 100px;
+    background-color: grey;
+}
+
+.thumbnail-container    {
+    position: relative;
+}
