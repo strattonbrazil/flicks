@@ -1,13 +1,13 @@
 Movie!
-
-
+<title>stillsDB</title>
 
 <link rel="stylesheet" type="text/css" href="/public/css/flicks.css">
 
+<div id="big-screen">
+    <img data-bind="attr: { src: previewUrl }" >
+</div>
 
-
-
-<div class="seek-bar" id="seek-bar" data-bind="event: { mouseover: onSeek, mouseout: offSeek }">
+<div class="seek-bar" id="seek-bar" data-bind="event: { mouseover: onSeek, mouseout: offSeek, click: onClick }">
     <div class="thumbnail-container" id="thumbnail-container" data-bind="visible: thumbnailVisible, style: { left: thumbnailOffset }">
         <img data-bind="attr: { src: thumbnailUrl }" >
         <div data-bind="text: seekPosition">
@@ -15,11 +15,10 @@ Movie!
     </div>
 </div>
 
-
 <script src="http://code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.0/knockout-min.js"></script>
-<script src="/public/js/movie.js"></script>
 <script>
     var cdnBase = '<%= cdnBase %>';
     var movieInfo = <%- JSON.stringify(movie) %>
 </script>
+<script src="/public/js/movie.js"></script>

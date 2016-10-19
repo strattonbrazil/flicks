@@ -116,7 +116,7 @@ app.get('/m/:movie', function (req, res) {
             cdnBase: cdnBase,
             movie: movieByEncodedTitle[movie]
         });
-        console.log(movieByEncodedTitle[movie]);
+        // console.log(movieByEncodedTitle[movie]);
     } else {
         res.redirect('/'); // TODO: send to error page?
     }
@@ -130,7 +130,7 @@ function onRequestFile(req, res) {
     var uri = url.parse(req.url).pathname;
 
     var filePath = path.join(picsDir, uri);
-    console.log(filePath);
+    // console.log(filePath);
     if (pathExists.sync(filePath)) {
         fs.readFile(filePath, "binary", function(err, file) {
             if (err) {
