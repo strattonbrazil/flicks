@@ -1,17 +1,13 @@
-Movie!
 <title>stillsDB</title>
 
 <link rel="stylesheet" type="text/css" href="/public/css/flicks.css">
 
-<div id="big-screen">
-    <img data-bind="attr: { src: previewUrl }" >
-</div>
-
-<div class="seek-bar" id="seek-bar" data-bind="event: { mouseover: onSeek, mouseout: offSeek, click: onClick }">
-    <div class="thumbnail-container" id="thumbnail-container" data-bind="visible: thumbnailVisible, style: { left: thumbnailOffset }">
+<div class="spaced centerContents" data-bind="text: title"></div>
+<img class="spaced centerContents force-fit" data-bind="attr: { src: previewUrl }" >
+<div class="spaced seek-bar"  id="seek-bar" data-bind="event: { mouseover: onSeek, mouseout: offSeek, click: onClick }">
+    <div class="thumbnail-container" id="thumbnail-container" data-bind="visible: thumbnailVisible, style: { left: thumbnailOffset, top: thumbnailShiftDown }">
         <img data-bind="attr: { src: thumbnailUrl }" >
-        <div data-bind="text: seekPosition">
-        </div>
+        <div data-bind="text: seekPosition"></div>
     </div>
 </div>
 

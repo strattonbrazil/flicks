@@ -1,3 +1,18 @@
+.spaced    {
+    display: flex;
+    margin: 10px auto 10px auto;
+}
+
+.centerContents   {
+    justify-content: center;
+}
+
+
+.force-fit  {
+    width: 900px;
+    height: 506px;
+}
+
 .seek-bar    {
     width: 900px;
     height: 100px;

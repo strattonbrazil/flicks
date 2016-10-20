@@ -1,4 +1,6 @@
+// device blueprints and default values
 var ViewModel = function() {
+    this.title = ko.observable('stillsDB.com');
     this.seekPosition = ko.observable();
     this.thumbnailVisible = ko.observable(false);
     this.onSeek = function ()   {
@@ -18,20 +20,25 @@ var ViewModel = function() {
     }
     this.thumbnailOffset = ko.observable();
     this.thumbnailUrl = ko.observable();
-    this.previewUrl = ko.observable(cdnBase + '/' + movieInfo.previewPaths[0]);
+    this.thumbnailShiftDown = 4;
+    // this.previewUrl = ko.observable(cdnBase + '/' + movieInfo.previewPaths[0]);
+    this.previewUrl = ko.observable('http://cdn.wallpapersafari.com/13/80/3fOp6W.jpg');
 };
 
+// assemble device
 var vm = new ViewModel();
 
+// start device
 ko.applyBindings(vm);
 
-// TODO do this using knockout instead of jquery
+// why is this outside the ViewModel ... could you replace vm. with this. ?
 $("#seek-bar").mousemove(function(e){
     var x = e.pageX - this.offsetLeft;
     var percent = x/this.offsetWidth;
     var seekReference = Math.round(percent*movieInfo.thumbnailPaths.length);
     // vm.seekPosition(x);
-    vm.thumbnailOffset(x);
+    vm.thumbnailOffset(x-82);
+    // right here, above this line ... x minus half the width of the thumbnail
     vm.thumbnailUrl(cdnBase + '/' + movieInfo.thumbnailPaths[seekReference]);
     //vm.previewUrl(cdnBase + '/' + movieInfo.previewPaths[20]);
 
