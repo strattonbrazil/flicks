@@ -1,20 +1,24 @@
 <title>stillsDB</title>
 
-<link rel="stylesheet" type="text/css" href="/public/css/flicks.css">
+<body data-bind="event: { keydown: onKeyDown }">
+    <link rel="stylesheet" type="text/css" href="/public/css/flicks.css">
 
-<div class="spaced centerContents" data-bind="text: title"></div>
-<img class="spaced centerContents force-fit" data-bind="attr: { src: previewUrl }" >
-<div class="spaced seek-bar"  id="seek-bar" data-bind="event: { mouseover: onSeek, mouseout: offSeek, click: onClick }">
-    <div class="thumbnail-container" id="thumbnail-container" data-bind="visible: thumbnailVisible, style: { left: thumbnailOffset, top: thumbnailShiftDown }">
-        <img data-bind="attr: { src: thumbnailUrl }" >
-        <div data-bind="text: seekPosition"></div>
+    <img id="fullscreen" data-bind="visible: fullscreenVisible, attr: { src: fullscreenUrl }"></div>
+    <div id="title" class="spaced centerContents" data-bind="text: title"></div>
+    <img id="preview-image" class="spaced centerContents force-fit" data-bind="event: {click: onPreviewClick }, attr: { src: previewUrl }" >
+    <div class="spaced seek-bar"  id="seek-bar" data-bind="event: { mousemove: onMouseMove, mouseover: onSeek, mouseout: offSeek, click: onClickSeekbar  }">
+        <div id="tracer" class="tracer" data-bind="visible: tracerVisible, style: { width: tracerWidth }"></div>
+        <div id="progress-bar" class="spaced progress-bar" data-bind="style: { width: seekPosition }"></div>
+        <div id="thumbnail-container" class="thumbnail-container" data-bind="visible: thumbnailVisibility, style: { left: thumbnailOffsetX, top: thumbnailOffsetY }">
+            <img id="thumbnail" class="thumbnail" data-bind="attr: { src: thumbnailUrl }" >
+        </div>
     </div>
-</div>
 
-<script src="http://code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.0/knockout-min.js"></script>
-<script>
-    var cdnBase = '<%= cdnBase %>';
-    var movieInfo = <%- JSON.stringify(movie) %>
-</script>
-<script src="/public/js/movie.js"></script>
+    <script src="http://code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.0/knockout-min.js"></script>
+    <script>
+        var cdnBase = '<%= cdnBase %>';
+        var movieInfo = <%- JSON.stringify(movie) %>
+    </script>
+    <script src="/public/js/movie.js"></script>
+</body>
