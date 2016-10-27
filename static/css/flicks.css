@@ -9,10 +9,11 @@ body    {
     font-style: bold;
     /*text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;*/
     letter-spacing: 3px;
+    background-color: white;
 }
 
 #preview-image {
-    border: 2pt solid white;
+    border: 2px solid white;
 }
 
 .spaced    {
@@ -29,32 +30,43 @@ body    {
     height: 506px;
 }
 
-.progress-bar   {
-    position: absolute;
-    height: 12px;
-    background-color: #4325AA;
-    border-right: 4px solid #F7761D;
-    z-index: 1;
-}
-
 .seek-bar    {
-    border: 2pt solid white;
-    /*width: 900px;*/
-    width: 736px;
-    height: 12px;
+    border: 2px solid white;
+    width: 900px;
+    /*width: 736px;*/
+    height: 20px;
     background-color: #8A17A3;
     z-index: 0;
 }
 
-.tracer     {
+.progress-bar   {
     position: absolute;
-    border-right: 4px solid #F7761D;
-    background: none;
-    height: 12px;
+    height: 20px;
+    background-color: #4325AA;
+    z-index: 1;
+}
+
+.progress-mark  {
+    position: absolute;
+    border-right: 6px solid #F7761D;
+    height: 32px;
+    width: 4px;
+    margin-top: -6px;
     z-index: 3;
 }
 
+.tracer     {
+    position: absolute;
+    border-right: 6px solid #F7761D;
+    background: none;
+    height: 32px;
+    margin-top: -6px;
+    z-index: 3;
+}
+
+
 .thumbnail-container    {
+    margin-top: -24px;
     position: relative;
     /*top: -100px;*/
     cursor: none;
@@ -62,12 +74,6 @@ body    {
 }
 
 .thumbnail    {
-    border: 4pt solid white;
+    border: 2px solid white;
     vertical-align: bottom;
-}
-
-#fullscreen     {
-    position: relative;
-    height: 100%;
-    width: 100%;
 }

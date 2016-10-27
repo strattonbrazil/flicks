@@ -11,7 +11,7 @@ const path = require('path');
 // const im = require('imagemagick');
 const gm = require('gm');
 const sync = require('synchronize');
-const sleep = require('sleep');
+// const sleep = require('sleep');
 
 const DEV_IMAGE_PORT = 9011;
 
@@ -69,6 +69,7 @@ for (var i = 0; i < movieMetadata.movies.length; i++) {
     let files = fs.readdirSync(movieDir);
     movie['previewPaths'] = [];
     movie['thumbnailPaths'] = [];
+    movie['hqPaths'] = [];
     for (let i in files) {
         let file = files[i];
         let picPath = path.join(movieDir, file);
@@ -93,6 +94,8 @@ for (var i = 0; i < movieMetadata.movies.length; i++) {
             });
         }
 
+        let relativeHqPath = path.relative(picsDir, picPath);
+        movie['hqPaths'].push(relativeHqPath);
         let relativePreviewPath = path.relative(picsDir, previewPath);
         movie['previewPaths'].push(relativePreviewPath);
         let relativeThumbnailPath = path.relative(picsDir, thumbnailPath);
@@ -129,7 +132,8 @@ app.get('/m/:movie', function (req, res) {
 http.createServer(onRequestFile).listen(DEV_IMAGE_PORT);
 function onRequestFile(req, res) {
     var uri = url.parse(req.url).pathname;
-    sleep.usleep(500000);   // half second, fakes network latency
+    // TODO maybe only sleep on preview images
+    // sleep.usleep(500000);   // half second, fakes network latency
     var filePath = path.join(picsDir, uri);
     // console.log(filePath);
     if (pathExists.sync(filePath)) {
@@ -140,10 +144,11 @@ function onRequestFile(req, res) {
                 res.end();
                 return;
             }
-
-            res.writeHead(200);
-            res.write(file, "binary");
-            res.end();
+            setTimeout(function()  {
+                res.writeHead(200);
+                res.write(file, "binary");
+                res.end();
+            }, 200);
         });
     } else {
         res.writeHead(404, {"Content-Type": "text/plain"});

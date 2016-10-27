@@ -1,5 +1,6 @@
 var ViewModel = function() {
     this.title = ko.observable('stillsDB.com');
+    this.hqIndex = ko.observable(0);
     this.previewIndex = ko.observable(0);
     this.thumbnailIndex = ko.observable(0);
     this.seekPosition = ko.observable();
@@ -9,6 +10,11 @@ var ViewModel = function() {
     this.tracerWidth = ko.observable();
     this.tracerVisible = ko.observable(false);
     // this.previewUrl = ko.observable('http://cdn.wallpapersafari.com/13/80/3fOp6W.jpg');
+    // set image source to empty string, see if that blows away the image
+    this.hqUrl = ko.computed(function()     {
+        return cdnBase + '/' + movieInfo.hqPaths[this.previewIndex()];
+    }, this);
+    // console.log(movieInfo);
     this.previewUrl = ko.computed(function()    {
         return cdnBase + '/' + movieInfo.previewPaths[this.previewIndex()];
     }, this);
@@ -19,18 +25,21 @@ var ViewModel = function() {
         var percent = this.previewIndex() / movieInfo.previewPaths.length;
         return percent * $('.seek-bar').width();
     }, this);
-    this.onPreviewClick = ko.observable();
-    this.fullscreenVisible = ko.observable(false);
-    this.fullscreenUrl = ko.observable();
 
+    let timestamp = 0;  // aaaaaah, global variable ...
     this.onKeyDown = function (vm,downEvent)    {
-        /* look at the last time this was changed, if less than a second just return */
-        console.log(downEvent);
-        if (downEvent.originalEvent.code == "ArrowRight")   {
-            this.previewIndex(this.previewIndex() + 1);
-        }
-        if (downEvent.originalEvent.code == "ArrowLeft")    {
-            this.previewIndex(this.previewIndex() - 1);
+        if (Date.now() - timestamp > 1000)  {
+            if (downEvent.originalEvent.code == "ArrowRight")   {
+                if (this.previewIndex() < (movieInfo.previewPaths.length - 1)) {
+                    this.previewIndex(this.previewIndex() + 1);
+                }
+            }
+            if (downEvent.originalEvent.code == "ArrowLeft")    {
+                if (this.previewIndex() > 0)    {
+                    this.previewIndex(this.previewIndex() - 1);
+                }
+            }
+            timestamp = Date.now();
         }
     }
 
@@ -58,19 +67,13 @@ var ViewModel = function() {
         var percent = x/seekBar.offsetWidth;
         this.thumbnailIndex(Math.round(percent*movieInfo.previewPaths.length));
         var xOffset = $('#thumbnail').width() * 0.5;
-        var yOffset = 0 - ($('#thumbnail').height() + 14); // fixed number, for the margin between the seek bar and the preview area and the width of the border around the thumbnail
+        var yOffset = 0 - ($('#thumbnail').height());
         this.thumbnailOffsetX(x - xOffset); // centers thumbnail over position in seekbar
         this.thumbnailOffsetY = (yOffset); // aligns thumbnail bottom edge with bottom of preview image area
-    };
-
-    this.onPreviewClick = function (vm,clickEvent)    {
-        this.fullscreenVisible = ko.observable(true);
     }
 
-    this.onFullscreenClick = function (vm,clickEvent)   {
-        this.fullscreenVisible = ko.observable(false);
-    }
-};
+};  // end of view model
+
 
 var vm = new ViewModel();
 

@@ -16,5 +16,8 @@
     "sequelize": "^3.24.3",
     "sleep": "^4.0.0",
     "synchronize": "^2.0.0"
+  },
+  "dependencies": {
+    "lightbox2": "^2.8.2"
   }
 }
