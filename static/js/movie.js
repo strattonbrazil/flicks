@@ -1,5 +1,6 @@
 var ViewModel = function() {
     this.title = ko.observable('stillsDB.com');
+    // this.fileName = ko.observable();
     this.hqIndex = ko.observable(0);
     this.previewIndex = ko.observable(0);
     this.thumbnailIndex = ko.observable(0);
@@ -13,6 +14,7 @@ var ViewModel = function() {
     // set image source to empty string, see if that blows away the image
     this.hqUrl = ko.computed(function()     {
         return cdnBase + '/' + movieInfo.hqPaths[this.previewIndex()];
+        // this.fileName = 'Hello World';
     }, this);
     // console.log(movieInfo);
     this.previewUrl = ko.computed(function()    {
@@ -25,6 +27,7 @@ var ViewModel = function() {
         var percent = this.previewIndex() / movieInfo.previewPaths.length;
         return percent * $('.seek-bar').width();
     }, this);
+
 
     let timestamp = 0;  // aaaaaah, global variable ...
     this.onKeyDown = function (vm,downEvent)    {

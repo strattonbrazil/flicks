@@ -11,7 +11,6 @@ const path = require('path');
 // const im = require('imagemagick');
 const gm = require('gm');
 const sync = require('synchronize');
-// const sleep = require('sleep');
 
 const DEV_IMAGE_PORT = 9011;
 
@@ -132,10 +131,7 @@ app.get('/m/:movie', function (req, res) {
 http.createServer(onRequestFile).listen(DEV_IMAGE_PORT);
 function onRequestFile(req, res) {
     var uri = url.parse(req.url).pathname;
-    // TODO maybe only sleep on preview images
-    // sleep.usleep(500000);   // half second, fakes network latency
     var filePath = path.join(picsDir, uri);
-    // console.log(filePath);
     if (pathExists.sync(filePath)) {
         fs.readFile(filePath, "binary", function(err, file) {
             if (err) {

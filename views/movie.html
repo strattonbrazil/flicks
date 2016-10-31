@@ -1,14 +1,15 @@
 
-<header>
+<head>
     <title>stillsDB</title>
     <link rel="stylesheet" type="text/css" href="/public/css/flicks.css">
     <link rel="stylesheet" type="text/css" href="/public/css/lightbox.css">
-</header>
+</head>
 <body data-bind="event: { keydown: onKeyDown }">
     <div id="title" class="spaced centerContents" data-bind="text: title"></div>
 
-    <a data-bind="attr: { href: hqUrl}" data-lightbox="iamnotsurewhatthisdoes" data-title="I hope this works" >
-        <img id="preview-image" class="spaced centerContents force-fit" data-bind="attr: { src: previewUrl }" >
+<!-- lightbox stuff -->
+    <a data-bind="attr: { href: hqUrl, 'data-title': 'fileName goes here'}" data-lightbox="iamnotsurewhatthisdoes" >
+        <img id="preview-image" rel="lightbox" class="spaced centerContents force-fit" data-bind="attr: { src: previewUrl }" >
     </a>
 
 
