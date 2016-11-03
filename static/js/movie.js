@@ -1,6 +1,5 @@
 var ViewModel = function() {
-    this.title = ko.observable('stillsDB.com');
-    // this.fileName = ko.observable();
+    this.fileName = ko.observable();
     this.hqIndex = ko.observable(0);
     this.previewIndex = ko.observable(0);
     this.thumbnailIndex = ko.observable(0);
@@ -28,7 +27,6 @@ var ViewModel = function() {
         return percent * $('.seek-bar').width();
     }, this);
 
-
     let timestamp = 0;  // aaaaaah, global variable ...
     this.onKeyDown = function (vm,downEvent)    {
         if (Date.now() - timestamp > 1000)  {
@@ -44,6 +42,7 @@ var ViewModel = function() {
             }
             timestamp = Date.now();
         }
+        return true;
     }
 
     this.onSeek = function ()   {
@@ -69,8 +68,8 @@ var ViewModel = function() {
         this.tracerWidth(x-4);
         var percent = x/seekBar.offsetWidth;
         this.thumbnailIndex(Math.round(percent*movieInfo.previewPaths.length));
-        var xOffset = $('#thumbnail').width() * 0.5;
-        var yOffset = 0 - ($('#thumbnail').height());
+        var xOffset = $('.thumbnail').width() * 0.5;
+        var yOffset = 0 - ($('.thumbnail').height());
         this.thumbnailOffsetX(x - xOffset); // centers thumbnail over position in seekbar
         this.thumbnailOffsetY = (yOffset); // aligns thumbnail bottom edge with bottom of preview image area
     }

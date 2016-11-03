@@ -1,0 +1,26 @@
+.lb-image {
+    border: solid 1px #888;
+}
+
+.lb-nav {
+    position: static;
+    overflow: visible;
+    width: 0;
+    height: 0;
+}
+.lb-nav a.lb-next {
+    float: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 25%;
+    min-width: 60px;
+}
+.lb-nav a.lb-prev {
+    float: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 25%;
+    min-width: 60px;
+}

@@ -3,27 +3,43 @@
     <title>stillsDB</title>
     <link rel="stylesheet" type="text/css" href="/public/css/flicks.css">
     <link rel="stylesheet" type="text/css" href="/public/css/lightbox.css">
+    <link rel="stylesheet" type="text/css" href="/public/css/rightclick.css">
+
 </head>
 <body data-bind="event: { keydown: onKeyDown }">
-    <div id="title" class="spaced centerContents" data-bind="text: title"></div>
-
-<!-- lightbox stuff -->
-    <a data-bind="attr: { href: hqUrl, 'data-title': 'fileName goes here'}" data-lightbox="iamnotsurewhatthisdoes" >
-        <img id="preview-image" rel="lightbox" class="spaced centerContents force-fit" data-bind="attr: { src: previewUrl }" >
-    </a>
-
-
-
-    <div class="spaced seek-bar"  id="seek-bar" data-bind="event: { mousemove: onMouseMove, mouseover: onSeek, mouseout: offSeek, click: onClickSeekbar  }">
-        <div id="tracer" class="tracer" data-bind="visible: tracerVisible, style: { width: tracerWidth }"></div>
-        <div id="progress-bar" class="spaced progress-bar" data-bind="style: { width: seekPosition }">
-            <div id="progress-mark" class="progress-mark" data-bind="style: { width: seekPosition }"></div>
+<!-- header -->
+        <div class="title">
+            stillsDB
         </div>
-        <div id="thumbnail-container" class="thumbnail-container" data-bind="visible: thumbnailVisibility, style: { left: thumbnailOffsetX, top: thumbnailOffsetY }">
-            <img id="thumbnail" class="thumbnail" data-bind="attr: { src: thumbnailUrl }" >
-        </div>
-    </div>
 
+<!-- preview -->
+        <div class="center-box">
+            <div class="preview-image-box">
+                <a class="preview-image-link" data-bind="attr: { href: hqUrl, 'data-title': 'fileName goes here'}" data-lightbox="iamnotsurewhatthisdoes" >
+                    <img class="preview-image" rel="lightbox[groupName]" data-bind="attr: { src: previewUrl }" >
+                </a>
+            </div>
+            <div class="nav prev">
+                <img src="/public/images/prev.png"/>
+            </div>
+            <div class="nav next">
+                <img src="/public/images/next.png"/>
+            </div>
+        </div>
+
+
+
+<!-- seek bar -->
+        <div class="seek-bar" data-bind="event: { mousemove: onMouseMove, mouseover: onSeek, mouseout: offSeek, click: onClickSeekbar  }">
+            <div class="progress-bar" data-bind="style: { width: seekPosition }">
+                <div class="progress-mark" data-bind="style: { width: seekPosition }"></div>
+            </div>
+            <div class="tracer" data-bind="visible: tracerVisible, style: { width: tracerWidth }"></div>
+            <div  class="thumbnail-container" data-bind="visible: thumbnailVisibility, style: { left: thumbnailOffsetX, top: thumbnailOffsetY }">
+                <img class="thumbnail" data-bind="attr: { src: thumbnailUrl }" >
+            </div>
+        </div>
+<!-- scripts -->
     <script src="http://code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.0/knockout-min.js"></script>
     <script>
