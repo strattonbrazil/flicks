@@ -11,24 +11,20 @@
         <div class="title">
             stillsDB
         </div>
-
 <!-- preview -->
         <div class="center-box">
-            <div class="preview-image-box">
+            <div class="preview-image-box" data-bind="event: {mouseenter: onNav, mouseleave: offNav}">
                 <a class="preview-image-link" data-bind="attr: { href: hqUrl, 'data-title': 'fileName goes here'}" data-lightbox="iamnotsurewhatthisdoes" >
                     <img class="preview-image" rel="lightbox[groupName]" data-bind="attr: { src: previewUrl }" >
                 </a>
             </div>
-            <div class="nav prev">
+            <div class="nav prev" data-bind="visible: navVisibility">
                 <img src="/public/images/prev.png"/>
             </div>
-            <div class="nav next">
+            <div class="nav next" data-bind="visible: navVisibility">
                 <img src="/public/images/next.png"/>
             </div>
         </div>
-
-
-
 <!-- seek bar -->
         <div class="seek-bar" data-bind="event: { mousemove: onMouseMove, mouseover: onSeek, mouseout: offSeek, click: onClickSeekbar  }">
             <div class="progress-bar" data-bind="style: { width: seekPosition }">
@@ -39,6 +35,11 @@
                 <img class="thumbnail" data-bind="attr: { src: thumbnailUrl }" >
             </div>
         </div>
+<!-- meta -->
+        <div class="meta" data-bind="text: textGoesHere">
+        </div>
+
+
 <!-- scripts -->
     <script src="http://code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.0/knockout-min.js"></script>

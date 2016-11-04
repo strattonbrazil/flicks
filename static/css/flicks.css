@@ -44,21 +44,25 @@ body    {
 
 .nav    {
     height: 506px;
-    width: 200px;
+    width: 150px;
     position: absolute;
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: 10;
+    background-color: rgba(0, 0, 0, 0.4);
 }
 
 .prev   {
-    border: 2px solid blue;
-    align-self: flex-start;
+    /*border: 2px solid blue;*/
+    margin-left: -375px;
+    opacity: 1;
 }
 
 .next   {
-    border: 2px solid green;
-    align-self: flex-end;
+    /*border: 2px solid green;*/
+    margin-left: 375px;
+    opacity: 1;
 }
 
 .seek-bar    {
