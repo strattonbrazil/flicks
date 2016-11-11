@@ -1,16 +1,22 @@
 {
     "movies": [
         {
-            "title" : "Avatar",
-            "title_encoded" : "avatar"
+            "title" : "Avatar (2009)",
+            "title_encoded" : "avatar",
+            "producers" : "Lightstorm Entertainment, Dune Entertainment, Ingenious Film Partners",
+            "directors" : "James Cameron"
         },
         {
-            "title" : "Guardians Of The Galaxy",
-            "title_encoded" : "guardiansOfTheGalaxy"
+            "title" : "Guardians Of The Galaxy (2014)",
+            "title_encoded" : "guardiansOfTheGalaxy",
+            "producers" : "Marvel Studios",
+            "directors" : "James Gunn"
         },
         {
-            "title" : "The Man From Uncle",
-            "title_encoded" : "manFromUncle"
+            "title" : "The Man From Uncle (2015)",
+            "title_encoded" : "manFromUncle",
+            "producers" : "Ritchie/Wigram Productions, RatPac-Dune Entertainment, Davis Entertainment",
+            "directors" : "Guy Ritchie"
         }
     ]
 }

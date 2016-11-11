@@ -8,8 +8,10 @@
 </head>
 <body data-bind="event: { keydown: onKeyDown }">
 <!-- header -->
-        <div class="title">
-            stillsDB
+        <div class="title-box">
+            <div class="title">
+                stillsDB
+            </div>
         </div>
 <!-- preview -->
         <div class="center-box">
@@ -36,9 +38,11 @@
             </div>
         </div>
 <!-- meta -->
-        <div class="meta" data-bind="text: textGoesHere">
+        <div class="center-box">
+            <div data-bind="text: titleGoesHere"></div>
+            <div data-bind="text: directorsGoesHere"></div>
+            <div data-bind="text: producersGoesHere"></div>
         </div>
-
 
 <!-- scripts -->
     <script src="http://code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>

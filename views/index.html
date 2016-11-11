@@ -1,3 +1,23 @@
-<% movies.forEach(function(movie) { %>
-<a href="/m/<%= movie.title_encoded %>"><%= movie.title %></a>
-<% }); %>
+
+<head>
+    <title>stillsDB</title>
+    <link rel="stylesheet" type="text/css" href="/public/css/flicks.css">
+</head>
+
+<body>
+    <div class="title-box">
+        <div class="title">
+            stillsDB
+        </div>
+    </div>
+
+
+
+    <% movies.forEach(function(movie) { %>
+        <form class="button-box">
+            <input type="button" onclick="location.href='/m/<%= movie.title_encoded %>';" class="button" value="<%= movie.title %>">
+        </form>
+    <% }); %>
+
+    <script src="http://code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>
+</body>

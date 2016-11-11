@@ -27,4 +27,17 @@ questions ...
     create functions for left and right movement through array of preview images, ones that can control whether the nav arrows appear (so no left option on load, no right option on last image)
     left arrow button and left nav arrow click call the left function, right arrow button and right nav arrow click call the right function, after either function timestamp is reset and position in array is tested to see if left/right nav arrows are displayed
     would skeleton look cleaner at this point given the additional controls?
-    
+
+
+
+
+
+
+
+
+old code ...
+    <% movies.forEach(function(movie) { %>
+        <a href="/m/<%= movie.title_encoded %>">
+            <%= movie.title %>
+        </a>
+    <% }); %>

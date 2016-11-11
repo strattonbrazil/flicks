@@ -10,7 +10,9 @@ var ViewModel = function() {
     this.thumbnailOffsetY = ko.observable();
     this.tracerWidth = ko.observable();
     this.tracerVisible = ko.observable(false);
-    this.textGoesHere = movieInfo.title;
+    this.titleGoesHere = movieInfo.title;
+    this.directorsGoesHere = 'Directed by ' + movieInfo.directors;
+    this.producersGoesHere = movieInfo.producers;
     // this.previewUrl = ko.observable('http://cdn.wallpapersafari.com/13/80/3fOp6W.jpg');
     // set image source to empty string, see if that blows away the image
     this.hqUrl = ko.computed(function()     {
@@ -42,6 +44,7 @@ var ViewModel = function() {
     this.onNav = function   ()  {
         this.navVisibility(true);
     }
+
     this.offNav = function   ()  {
         this.navVisibility(false);
     }
