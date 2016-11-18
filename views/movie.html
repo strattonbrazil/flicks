@@ -15,17 +15,18 @@
         </div>
 <!-- preview -->
         <div class="center-box">
-            <div class="preview-image-box" data-bind="event: {mouseenter: onNav, mouseleave: offNav}">
-                <a class="preview-image-link" data-bind="attr: { href: hqUrl, 'data-title': 'fileName goes here'}" data-lightbox="iamnotsurewhatthisdoes" >
+            <div class="preview-image-box" data-bind="event: {mouseenter: onPreview, mouseleave: offPreview}">
+                <a class="preview-image-link" data-bind="attr: { href: hqUrl, 'data-title': fileName}" data-lightbox="iamnotsurewhatthisdoes" >
                     <img class="preview-image" rel="lightbox[groupName]" data-bind="attr: { src: previewUrl }" >
                 </a>
+                <div class="nav prev" data-bind="visible: prevNavVisibility, event: {mousedown: goPrev}">
+                    <img src="/public/images/prev.png"/>
+                </div>
+                <div class="nav next" data-bind="visible: nextNavVisibility, event: {mousedown: goNext}">
+                    <img src="/public/images/next.png"/>
+                </div>
             </div>
-            <div class="nav prev" data-bind="visible: navVisibility">
-                <img src="/public/images/prev.png"/>
-            </div>
-            <div class="nav next" data-bind="visible: navVisibility">
-                <img src="/public/images/next.png"/>
-            </div>
+
         </div>
 <!-- seek bar -->
         <div class="seek-bar" data-bind="event: { mousemove: onMouseMove, mouseover: onSeek, mouseout: offSeek, click: onClickSeekbar  }">

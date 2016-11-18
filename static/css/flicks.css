@@ -6,7 +6,6 @@ body    {
     display: flex;
     flex-direction: column;
     align-items: center;
-
 }
 
 .title  {
@@ -44,8 +43,10 @@ body    {
 }
 
 .preview-image-box {
+    position: relative;
     min-height: 200px;
     min-width: 200px;
+    z-index: 0;
 }
 
 .preview-image  {
@@ -58,22 +59,23 @@ body    {
     height: 506px;
     width: 150px;
     position: absolute;
+    top: 0px;
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 10;
+    /*z-index: 0;*/
     background-color: rgba(0, 0, 0, 0.4);
 }
 
 .prev   {
     /*border: 2px solid blue;*/
-    margin-left: -375px;
+    left: 0px;
     opacity: 1;
 }
 
 .next   {
     /*border: 2px solid green;*/
-    margin-left: 375px;
+    right: 0px;
     opacity: 1;
 }
 
@@ -125,9 +127,13 @@ body    {
     vertical-align: bottom;
 }
 
+.unclickable    {
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
 
-
-.
 
 
 

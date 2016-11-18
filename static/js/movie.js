@@ -4,7 +4,8 @@ var ViewModel = function() {
     this.previewIndex = ko.observable(0);
     this.thumbnailIndex = ko.observable(0);
     this.seekPosition = ko.observable();
-    this.navVisibility = ko.observable(false);
+    this.prevNavVisibility = ko.observable(false);
+    this.nextNavVisibility = ko.observable(false);
     this.thumbnailVisibility = ko.observable(false);
     this.thumbnailOffsetX = ko.observable();
     this.thumbnailOffsetY = ko.observable();
@@ -13,11 +14,11 @@ var ViewModel = function() {
     this.titleGoesHere = movieInfo.title;
     this.directorsGoesHere = 'Directed by ' + movieInfo.directors;
     this.producersGoesHere = movieInfo.producers;
-    // this.previewUrl = ko.observable('http://cdn.wallpapersafari.com/13/80/3fOp6W.jpg');
-    // set image source to empty string, see if that blows away the image
+    this.fileName = ko.computed(function()  {
+        return movieInfo.hqPaths[this.previewIndex()];
+    }, this);
     this.hqUrl = ko.computed(function()     {
         return cdnBase + '/' + movieInfo.hqPaths[this.previewIndex()];
-        // this.fileName = 'Hello World';
     }, this);
     // console.log(movieInfo);
     this.previewUrl = ko.computed(function()    {
@@ -41,31 +42,45 @@ var ViewModel = function() {
         this.tracerVisible(false);
     }
 
-    this.onNav = function   ()  {
-        this.navVisibility(true);
-    }
-
-    this.offNav = function   ()  {
-        this.navVisibility(false);
-    }
-
-    let timestamp = 0;  // eek, global variable ...
-    this.onKeyDown = function (vm,downEvent)    {
-        if (Date.now() - timestamp > 1000)  {
-            if (downEvent.originalEvent.code == "ArrowRight")   {
-                if (this.previewIndex() < (movieInfo.previewPaths.length - 1)) {
-                    this.previewIndex(this.previewIndex() + 1);
-                }
-            }
-            if (downEvent.originalEvent.code == "ArrowLeft")    {
-                if (this.previewIndex() > 0)    {
-                    this.previewIndex(this.previewIndex() - 1);
-                }
-            }
-            timestamp = Date.now();
+    this.onPreview = function()     {
+        if (this.previewIndex() > 0)    {
+            this.prevNavVisibility(true);
         }
-        return true; // necessary to keep onKeyDown from blocking key commands from bubbling up to browser
+        if (this.previewIndex() < (movieInfo.previewPaths.length - 1)) {
+            this.nextNavVisibility(true);
+        }
+        // this.navVisibility(true);
     }
+
+    this.offPreview = function()    {
+        this.prevNavVisibility(false);
+        this.nextNavVisibility(false);
+    }
+
+this.onKeyDown = function (vm,downEvent)    {
+    if (downEvent.originalEvent.code == "ArrowLeft")   {
+         this.goPrev();
+    }
+    if (downEvent.originalEvent.code == "ArrowRight")   {
+         this.goNext();
+    }
+    return true;
+}
+
+let timestamp = 0;  // eek, global variable ...
+this.goPrev = function ()   {
+    if ((Date.now() - timestamp > 1000) && (this.previewIndex() > 0))  {
+        this.previewIndex(this.previewIndex() - 1);
+        timestamp = Date.now();
+    };
+}
+
+this.goNext = function ()   {
+    if ((Date.now() - timestamp > 1000) && (this.previewIndex() < (movieInfo.previewPaths.length - 1)))  {
+        this.previewIndex(this.previewIndex() + 1);
+        timestamp = Date.now();
+    }
+}
 
     this.onClickSeekbar = function (vm,clickEvent)  {
         var seekBar = clickEvent.currentTarget;
