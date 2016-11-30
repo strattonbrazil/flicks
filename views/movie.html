@@ -1,6 +1,7 @@
 
 <head>
     <title>stillsDB</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:700" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="/public/css/flicks.css">
     <link rel="stylesheet" type="text/css" href="/public/css/lightbox.css">
     <link rel="stylesheet" type="text/css" href="/public/css/rightclick.css">
@@ -8,42 +9,44 @@
 </head>
 <body data-bind="event: { keydown: onKeyDown }">
 <!-- header -->
-        <div class="title-box">
-            <div class="title">
-                stillsDB
-            </div>
+    <div class="title-box" data-bind="event: {click: homeClick}">
+        <div class="title">
+            stillsDB
         </div>
+    </div>
 <!-- preview -->
-        <div class="center-box">
-            <div class="preview-image-box" data-bind="event: {mouseenter: onPreview, mouseleave: offPreview}">
-                <a class="preview-image-link" data-bind="attr: { href: hqUrl, 'data-title': fileName}" data-lightbox="iamnotsurewhatthisdoes" >
-                    <img class="preview-image" rel="lightbox[groupName]" data-bind="attr: { src: previewUrl }" >
-                </a>
-                <div class="nav prev" data-bind="visible: prevNavVisibility, event: {mousedown: goPrev}">
-                    <img src="/public/images/prev.png"/>
-                </div>
-                <div class="nav next" data-bind="visible: nextNavVisibility, event: {mousedown: goNext}">
-                    <img src="/public/images/next.png"/>
-                </div>
+    <div class="center-box">
+        <div class="preview-image-box" data-bind="event: {mouseenter: onPreview, mouseleave: offPreview}">
+            <a class="preview-image-link" data-bind="attr: { href: hqUrl, 'data-title': fileName}" data-lightbox="iamnotsurewhatthisdoes" >
+                <img class="preview-image" rel="lightbox[groupName]" data-bind="attr: { src: previewUrl }" >
+            </a>
+            <div class="nav prev" data-bind="visible: prevNavVisibility, event: {mousedown: goPrev}">
+                <img src="/public/images/prev.png"/>
             </div>
-
+            <div class="nav next" data-bind="visible: nextNavVisibility, event: {mousedown: goNext}">
+                <img src="/public/images/next.png"/>
+            </div>
         </div>
+    </div>
 <!-- seek bar -->
-        <div class="seek-bar" data-bind="event: { mousemove: onMouseMove, mouseover: onSeek, mouseout: offSeek, click: onClickSeekbar  }">
-            <div class="progress-bar" data-bind="style: { width: seekPosition }">
-                <div class="progress-mark" data-bind="style: { width: seekPosition }"></div>
-            </div>
-            <div class="tracer" data-bind="visible: tracerVisible, style: { width: tracerWidth }"></div>
-            <div  class="thumbnail-container" data-bind="visible: thumbnailVisibility, style: { left: thumbnailOffsetX, top: thumbnailOffsetY }">
-                <img class="thumbnail" data-bind="attr: { src: thumbnailUrl }" >
-            </div>
+    <div class="seek-bar" data-bind="event: { mousemove: onMouseMove, mouseover: onSeek, mouseout: offSeek, click: onClickSeekbar  }">
+        <div class="progress-bar" data-bind="style: { width: seekPosition }">
+            <div class="progress-mark" data-bind="style: { width: seekPosition }"></div>
         </div>
+        <div class="tracer" data-bind="visible: tracerVisible, style: { width: tracerWidth }"></div>
+        <div  class="thumbnail-container" data-bind="visible: thumbnailVisibility, style: { left: thumbnailOffsetX, top: -92 }">
+            <img class="thumbnail" data-bind="attr: { src: thumbnailUrl }" >
+        </div>
+    </div>
 <!-- meta -->
-        <div class="center-box">
-            <div data-bind="text: titleGoesHere"></div>
-            <div data-bind="text: directorsGoesHere"></div>
-            <div data-bind="text: producersGoesHere"></div>
-        </div>
+    <div class="center-box">
+        <div data-bind="text: titleGoesHere"></div>
+        <div data-bind="text: directorsGoesHere"></div>
+        <div data-bind="text: producersGoesHere"></div>
+        <input type="button"  data-bind="attr: { value: buttonPrompt, onclick: buttonAction}">
+    </div>
+    <img data-bind="visible: false, attr: { src: previousPreviewUrl}">
+    <img data-bind="visible: false, attr: { src: nextPreviewUrl}">
 
 <!-- scripts -->
     <script src="http://code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>

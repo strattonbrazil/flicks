@@ -3,9 +3,10 @@
 import sys
 import os
 import json
-import Image # python pillow library
+import Image, ImageDraw # python pillow library
 
-PREVIEW_SIZE = (500, 400)
+PREVIEW_SIZE = (900, 508)
+THUMBNAIL_SIZE = (200, 92)
 
 MOVIES_MANIFEST = os.getenv("MOVIES_MANIFEST")
 if not MOVIES_MANIFEST:
@@ -24,20 +25,34 @@ manifest = json.load(manifestFile)
 for movie in manifest["movies"]:
     moviePicPath = os.path.join(PICS_DIR, movie["title_encoded"])
     hqPicPath = os.path.join(moviePicPath, "hq")
+    print "processing movie: " + movie["title_encoded"]
 
     if os.path.exists(hqPicPath):
         previewPicPath = os.path.join(moviePicPath, "preview")
+        thumbnailPicPath = os.path.join(moviePicPath, "thumbnail")
+
         if not os.path.exists(previewPicPath):
             print "creating preview path: " + previewPicPath
             os.makedirs(previewPicPath)
 
+        if not os.path.exists(thumbnailPicPath):
+            print "creating thumbnail path: " + thumbnailPicPath
+            os.makedirs(thumbnailPicPath)
+
         for dirName, subdirList, fileList in os.walk(hqPicPath):
-            for hqFile in fileList:
+            #TODO organize numerically
+            for i, hqFile in enumerate(fileList):
+                sys.stdout.write("\rProcessing %i of %i" % (i + 1, len(fileList)))
+                sys.stdout.flush()
                 im = Image.open(os.path.join(hqPicPath, hqFile))
-
-                # make preview image
-
+                print os.path.join(hqPicPath, hqFile)
                 im.thumbnail(PREVIEW_SIZE, Image.ANTIALIAS)
-                im.save(os.path.join(previewPicPath, hqFile))
+                previewPath = os.path.join(previewPicPath, hqFile)
+                previewPath = previewPath.replace(".png",".jpg")
+                im.save(previewPath, "jpeg")
+                im.thumbnail(THUMBNAIL_SIZE, Image.ANTIALIAS)
+                thumbnailPath = os.path.join(thumbnailPicPath, hqFile)
+                thumbnailPath = thumbnailPath.replace(".png",".jpg")
+                im.save(thumbnailPath, "jpeg")
     else:
         print "hq pics not found, skipping movie: " + hqPicPath

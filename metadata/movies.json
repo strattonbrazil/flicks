@@ -1,22 +1,37 @@
 {
     "movies": [
-        {
-            "title" : "Avatar (2009)",
-            "title_encoded" : "avatar",
-            "producers" : "Lightstorm Entertainment, Dune Entertainment, Ingenious Film Partners",
-            "directors" : "James Cameron"
-        },
+
         {
             "title" : "Guardians Of The Galaxy (2014)",
             "title_encoded" : "guardiansOfTheGalaxy",
             "producers" : "Marvel Studios",
-            "directors" : "James Gunn"
+            "directors" : "directed by James Gunn",
+            "buttonPrompt" : "Watch Trailer",
+            "buttonAddress" : "https://www.amazon.com/dp/B00QROJ94Q?autoplaytrailer=1"
         },
         {
             "title" : "The Man From Uncle (2015)",
             "title_encoded" : "manFromUncle",
             "producers" : "Ritchie/Wigram Productions, RatPac-Dune Entertainment, Davis Entertainment",
-            "directors" : "Guy Ritchie"
+            "directors" : "directed by Guy Ritchie",
+            "buttonPrompt" : "Watch Trailer",
+            "buttonAddress" : "https://www.amazon.com/dp/B013WF1Z4O?autoplaytrailer=1"
+        },
+        {
+            "title" : "X-Men Origins: Wolverine (2009)",
+            "title_encoded" : "xmenOriginsWolverine",
+            "producers" : "marvel Entertainment, The Donners' Company, Seed Productions",
+            "directors" : "directed by Gavin Hood",
+            "buttonPrompt" : "Watch Trailer",
+            "buttonAddress" : "https://www.amazon.com/dp/B00DU70TN8?autoplaytrailer=1"
+        },
+        {
+            "title" : "Avatar (2009)",
+            "title_encoded" : "avatar",
+            "producers" : "Lightstorm Entertainment, Dune Entertainment, Ingenious Film Partners",
+            "directors" : "directed by James Cameron",
+            "buttonPrompt" : "Watch Trailer",
+            "buttonAddress" : "https://www.amazon.com/dp/B003EVWDR0?autoplaytrailer=1"
         }
     ]
 }

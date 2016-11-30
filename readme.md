@@ -1,18 +1,12 @@
 
 
-Thumbnail ...
-    popping. on page load first thumbnail appears on bottom of seekbar. why?!
-
-Preview ..
-    image buffering (on preview 5, buffer 4 and 6)
-
-General ...
-
 
 code ...
+    counter to display frame being displayed in preview
 
-watermark ...
-    figure out how to embed watermark, or at least experiment with it
+pngToJpg ...
+    convert png previews and thumbnails to jpg
 
-nav arrows ...
-    mousedown on left/right navs does not repeat, can fix with jquery, should I?
+
+
+buttonAction is calling a function, not getting the instruction

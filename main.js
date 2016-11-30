@@ -52,17 +52,20 @@ for (var i = 0; i < movieMetadata.movies.length; i++) {
     let movieDir = path.join(picsDir, movie['title_encoded'], "hq")
     let moviePreviewDir = path.join(picsDir, movie['title_encoded'], "preview");
     if (!pathExists.sync(moviePreviewDir)) {
-        console.log("creating previews for '" + movie['title_encoded']);
-        fs.mkdir(moviePreviewDir);
+        console.warn(moviePreviewDir + " does not exist");
+        delete movieByEncodedTitle[movie["title_encoded"]];
+        continue;
     }
     let movieThumbnailDir = path.join(picsDir, movie['title_encoded'], "thumbnail");
     if (!pathExists.sync(movieThumbnailDir)) {
-        console.log("creating thumbnails for '" + movie['title_encoded']);
-        fs.mkdir(movieThumbnailDir);
+        console.warn(movieThumbnailDir + " does not exist");
+        delete movieByEncodedTitle[movie["title_encoded"]];
+        continue;
     }
 
     if (!pathExists.sync(movieDir)) {
         console.warn("unable to find pic for for '" + movie['title_encoded'] + "', skipping");
+        delete movieByEncodedTitle[movie["title_encoded"]];
         continue;
     }
     let files = fs.readdirSync(movieDir);
@@ -73,26 +76,11 @@ for (var i = 0; i < movieMetadata.movies.length; i++) {
         let file = files[i];
         let picPath = path.join(movieDir, file);
         let previewPath = path.join(moviePreviewDir, file);
-        previewPath = previewPath.replace(".png", ".jpg");
+        // previewPath = previewPath.replace(".png", ".jpg");
         let thumbnailPath = path.join(movieThumbnailDir, file);
-        thumbnailPath = thumbnailPath.replace(".png", ".jpg");
+        // thumbnailPath = thumbnailPath.replace(".png", ".jpg");
 
-        // create the preview if not present
-        if (!pathExists.sync(previewPath)) {
-            sync.fiber(function() {
-                console.log("creating preview image: " + previewPath);
-                sync.await(gm(picPath).resize(900, 508).write(previewPath, sync.defer()));
-            });
-        }
-
-        // create the thumbnail if not present
-        if (!pathExists.sync(thumbnailPath)) {
-            sync.fiber(function() {
-                console.log("creating thumbnail image: " + thumbnailPath);
-                sync.await(gm(picPath).resize(200, 92).write(thumbnailPath, sync.defer()));
-            });
-        }
-
+    // TODO make sure for every hq image the preview and thumbnail exist
         let relativeHqPath = path.relative(picsDir, picPath);
         movie['hqPaths'].push(relativeHqPath);
         let relativePreviewPath = path.relative(picsDir, previewPath);
@@ -144,7 +132,7 @@ function onRequestFile(req, res) {
                 res.writeHead(200);
                 res.write(file, "binary");
                 res.end();
-            }, 200);
+            }, 1000);
         });
     } else {
         res.writeHead(404, {"Content-Type": "text/plain"});
