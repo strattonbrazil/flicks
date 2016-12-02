@@ -16,25 +16,19 @@ var ViewModel = function() {
     this.producersGoesHere = movieInfo.producers;
     this.buttonPrompt = movieInfo.buttonPrompt;
     this.buttonAction = function()  {
-        window.open(movieInfo.buttonAddress, '_blank');
+        window.open(movieInfo.buttonAddress);
     };
     this.previewUrl = ko.computed(function()    {
         return cdnBase + '/' + movieInfo.previewPaths[this.previewIndex()];
     }, this);
-
     this.previousPreviewUrl = ko.computed(function()    {
         var previousIndex = Math.max(this.previewIndex()-1, 0);
         return cdnBase + '/' + movieInfo.previewPaths[previousIndex];
     }, this);
-
     this.nextPreviewUrl = ko.computed(function()    {
         var nextIndex = Math.min(this.previewIndex()+1, movieInfo.previewPaths.length-1);
         return cdnBase + '/' + movieInfo.previewPaths[nextIndex];
     }, this);
-
-
-
-
     this.fileName = ko.computed(function()  {
         return movieInfo.hqPaths[this.previewIndex()];
     }, this);
@@ -48,6 +42,10 @@ var ViewModel = function() {
     this.seekPosition = ko.computed(function()  {
         var percent = this.previewIndex() / movieInfo.previewPaths.length;
         return percent * $('.seek-bar').width();
+    }, this);
+    this.frameNumber = ko.computed(function()   {
+        var string = movieInfo.hqPaths[this.previewIndex()];
+        return string.slice(-8,-4) + ' of ' + movieInfo.hqPaths.length;
     }, this);
 
     this.onSeek = function ()   {
@@ -124,7 +122,6 @@ var ViewModel = function() {
     };
 
 };  // end of view model
-
 
 var vm = new ViewModel();
 

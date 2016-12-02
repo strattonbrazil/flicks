@@ -11,11 +11,11 @@
             stillsDB
         </div>
     </div>
-    <div class="wrapper">
-        <div class="column-list">
-            <div class="button-box">
-                Movies
-            </div>
+    <div class="index-wrapper">
+        <div>
+            <div class="index-column-header">
+            Feature Films
+            <div>
             <% movies.forEach(function(movie) { %>
                 <form class="button-box">
                     <input type="button" onclick="location.href='/m/<%= movie.title_encoded %>';" class="button" value="<%= movie.title %>">

@@ -45,14 +45,15 @@ for movie in manifest["movies"]:
                 sys.stdout.write("\rProcessing %i of %i" % (i + 1, len(fileList)))
                 sys.stdout.flush()
                 im = Image.open(os.path.join(hqPicPath, hqFile))
-                print os.path.join(hqPicPath, hqFile)
-                im.thumbnail(PREVIEW_SIZE, Image.ANTIALIAS)
-                previewPath = os.path.join(previewPicPath, hqFile)
-                previewPath = previewPath.replace(".png",".jpg")
-                im.save(previewPath, "jpeg")
-                im.thumbnail(THUMBNAIL_SIZE, Image.ANTIALIAS)
-                thumbnailPath = os.path.join(thumbnailPicPath, hqFile)
-                thumbnailPath = thumbnailPath.replace(".png",".jpg")
-                im.save(thumbnailPath, "jpeg")
+                if not os.path.exists(os.path.join(previewPicPath, hqFile)):
+                    im.thumbnail(PREVIEW_SIZE, Image.ANTIALIAS)
+                    previewPath = os.path.join(previewPicPath, hqFile)
+                    previewPath = previewPath.replace(".png",".jpg")
+                    im.save(previewPath, "jpeg")
+                if not os.path.exists(os.path.join(thumbnailPicPath, hqFile)):
+                    im.thumbnail(THUMBNAIL_SIZE, Image.ANTIALIAS)
+                    thumbnailPath = os.path.join(thumbnailPicPath, hqFile)
+                    thumbnailPath = thumbnailPath.replace(".png",".jpg")
+                    im.save(thumbnailPath, "jpeg")
     else:
         print "hq pics not found, skipping movie: " + hqPicPath

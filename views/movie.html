@@ -1,11 +1,10 @@
 
 <head>
     <title>stillsDB</title>
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:700" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="/public/css/flicks.css">
     <link rel="stylesheet" type="text/css" href="/public/css/lightbox.css">
     <link rel="stylesheet" type="text/css" href="/public/css/rightclick.css">
-
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:700" rel="stylesheet">
 </head>
 <body data-bind="event: { keydown: onKeyDown }">
 <!-- header -->
@@ -15,7 +14,7 @@
         </div>
     </div>
 <!-- preview -->
-    <div class="center-box">
+    <div class="centering-wrapper">
         <div class="preview-image-box" data-bind="event: {mouseenter: onPreview, mouseleave: offPreview}">
             <a class="preview-image-link" data-bind="attr: { href: hqUrl, 'data-title': fileName}" data-lightbox="iamnotsurewhatthisdoes" >
                 <img class="preview-image" rel="lightbox[groupName]" data-bind="attr: { src: previewUrl }" >
@@ -39,11 +38,19 @@
         </div>
     </div>
 <!-- meta -->
-    <div class="center-box">
-        <div data-bind="text: titleGoesHere"></div>
-        <div data-bind="text: directorsGoesHere"></div>
-        <div data-bind="text: producersGoesHere"></div>
-        <input type="button"  data-bind="attr: { value: buttonPrompt, onclick: buttonAction}">
+    <div class="centering-wrapper">
+        <div class="meta-box-container">
+            <div class="meta-box-center">
+                <div data-bind="text: titleGoesHere, style: { fontSize:20 }"></div>
+                <div data-bind="text: directorsGoesHere"></div>
+                <div data-bind="text: producersGoesHere"></div>
+                <div class="button-box">
+                    <input class="button" type="button"  data-bind="attr: { value: buttonPrompt}, click: buttonAction">
+                </div>
+            </div>
+            <div class="meta-box-right" data-bind="text: frameNumber">
+            </div>
+        </div>
     </div>
     <img data-bind="visible: false, attr: { src: previousPreviewUrl}">
     <img data-bind="visible: false, attr: { src: nextPreviewUrl}">

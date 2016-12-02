@@ -32,11 +32,11 @@ body    {
     font-family: 'Open Sans', sans-serif;
     width: 300px;
 }
-.center-box {
+
+.centering-wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 10px;
 }
 
 .preview-image-box {
@@ -83,20 +83,20 @@ body    {
     width: 900px;
     /*width: 736px;*/
     height: 20px;
-    background-color: #8A17A3;
+    background-color: #8E9ABB;
     z-index: 0;
 }
 
 .progress-bar   {
     position: absolute;
     height: 20px;
-    background-color: #4325AA;
+    background-color: #60709B;
     z-index: 1;
 }
 
 .progress-mark  {
     position: absolute;
-    border-right: 6px solid #F7761D;
+    border-right: 6px solid #203263;
     height: 32px;
     width: 4px;
     margin-top: -6px;
@@ -105,7 +105,7 @@ body    {
 
 .tracer     {
     position: absolute;
-    border-right: 6px solid #F7761D;
+    border-right: 6px solid #203263;
     background: none;
     height: 32px;
     margin-top: -6px;
@@ -132,12 +132,35 @@ body    {
     user-select: none;
 }
 
-.centered    {
+.meta-box-container {
+    width: 900px;
     display: flex;
-    margin: 0 auto 10px auto;
+    flex-direction: column;
+    margin-top: 10px;
 }
 
-.force-fit  {
-    width: 900px;
-    height: 506px;
+.meta-box-center {
+    display: flex;
+    align-self: center;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+}
+
+.meta-box-right {
+    position: absolute;
+    display: flex;
+    align-self: flex-end;
+}
+
+.index-wrapper {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.index-column-header    {
+    font-style: italic;
 }

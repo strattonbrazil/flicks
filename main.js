@@ -44,6 +44,18 @@ if (!pathExists.sync(picsDir)) {
 //
 var contents = fs.readFileSync(moviesManifest, 'utf8');
 var movieMetadata = JSON.parse(contents);
+
+function sortByTitle(a,b)   {
+    if (a.title < b.title)  {
+        return -1;
+    }
+    if (a.title > b.title)  {
+        return 1;
+    }
+    return 0;
+}
+movieMetadata.movies.sort(sortByTitle);
+
 var movieByEncodedTitle = {}
 for (var i = 0; i < movieMetadata.movies.length; i++) {
     let movie = movieMetadata.movies[i];
@@ -76,9 +88,9 @@ for (var i = 0; i < movieMetadata.movies.length; i++) {
         let file = files[i];
         let picPath = path.join(movieDir, file);
         let previewPath = path.join(moviePreviewDir, file);
-        // previewPath = previewPath.replace(".png", ".jpg");
+        previewPath = previewPath.replace(".png", ".jpg");
         let thumbnailPath = path.join(movieThumbnailDir, file);
-        // thumbnailPath = thumbnailPath.replace(".png", ".jpg");
+        thumbnailPath = thumbnailPath.replace(".png", ".jpg");
 
     // TODO make sure for every hq image the preview and thumbnail exist
         let relativeHqPath = path.relative(picsDir, picPath);
