@@ -30,15 +30,15 @@ if (!pathExists.sync(moviesManifest)) {
     process.exit(1);
 }
 
-var picsDir = process.env.PICS_DIR;
-if (picsDir === undefined) {
-    console.error("no PICS_DIR specified, exiting...");
-    process.exit(1);
-}
-if (!pathExists.sync(picsDir)) {
-    console.error("unable find to pic dir: "  + picsDir)
-    process.exit(1);
-}
+// var picsDir = process.env.PICS_DIR;
+// if (picsDir === undefined) {
+//     console.error("no PICS_DIR specified, exiting...");
+//     process.exit(1);
+// }
+// if (!pathExists.sync(picsDir)) {
+//     console.error("unable find to pic dir: "  + picsDir)
+//     process.exit(1);
+// }
 
 // process movies (create preview images)
 //
