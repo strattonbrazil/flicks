@@ -114,7 +114,8 @@ app.get('/', function (req, res) {
 app.get('/m/:movie', function (req, res) {
     let movie = req.params.movie;
     if (movie in movieByEncodedTitle) {
-        var cdnBase = "http://localhost:" + DEV_IMAGE_PORT;
+        // var cdnBase = "http://localhost:" + DEV_IMAGE_PORT;
+        var cdnBase = "http://stillsdb-f58.kxcdn.com";
         res.render('movie', {
             cdnBase: cdnBase,
             movie: movieByEncodedTitle[movie]
