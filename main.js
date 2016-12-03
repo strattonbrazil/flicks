@@ -39,6 +39,7 @@ if (!pathExists.sync(moviesManifest)) {
 //     console.error("unable find to pic dir: "  + picsDir)
 //     process.exit(1);
 // }
+var picsDir = "http://stillsdb-f58.kxcdn.com";
 
 // process movies (create preview images)
 //
