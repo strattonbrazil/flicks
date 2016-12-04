@@ -27,19 +27,20 @@ if (moviesManifest === undefined) {
 }
 if (!pathExists.sync(moviesManifest)) {
     console.error("unable to find movie manifest: " + moviesManifest);
-    process.exit(1);
+    // process.exit(1);
 }
 
-// var picsDir = process.env.PICS_DIR;
-// if (picsDir === undefined) {
-//     console.error("no PICS_DIR specified, exiting...");
-//     process.exit(1);
-// }
-// if (!pathExists.sync(picsDir)) {
-//     console.error("unable find to pic dir: "  + picsDir)
-//     process.exit(1);
-// }
-var picsDir = "http://stillsdb-f58.kxcdn.com";
+var picsDir = process.env.PICS_DIR;
+// var picsDir = "http://stillsdb-f58.kxcdn.com/";
+
+if (picsDir === undefined) {
+    console.error("no PICS_DIR specified, exiting...");
+    // process.exit(1);
+}
+if (!pathExists.sync(picsDir)) {
+    console.error("unable find to pic dir: "  + picsDir)
+    // process.exit(1);
+}
 
 // process movies (create preview images)
 //
@@ -56,6 +57,8 @@ function sortByTitle(a,b)   {
     return 0;
 }
 movieMetadata.movies.sort(sortByTitle);
+
+// TODO make network question to get manifest.json
 
 var movieByEncodedTitle = {}
 for (var i = 0; i < movieMetadata.movies.length; i++) {
@@ -124,6 +127,7 @@ app.get('/m/:movie', function (req, res) {
         // console.log(movieByEncodedTitle[movie]);
     } else {
         res.redirect('/'); // TODO: send to error page?
+        console.log('Redirected, movie not in movieByEncodedTitle');
     }
 });
 
