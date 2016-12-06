@@ -7,7 +7,8 @@
             "producers" : "Marvel Studios",
             "directors" : "directed by James Gunn",
             "buttonPrompt" : "Watch Trailer",
-            "buttonAddress" : "https://www.amazon.com/dp/B00QROJ94Q?autoplaytrailer=1"
+            "buttonAddress" : "https://www.amazon.com/dp/B00QROJ94Q?autoplaytrailer=1",
+            "frameCount" : 3628
         },
         {
             "title" : "The Man From Uncle (2015)",
@@ -15,7 +16,8 @@
             "producers" : "Ritchie/Wigram Productions, RatPac-Dune Entertainment, Davis Entertainment",
             "directors" : "directed by Guy Ritchie",
             "buttonPrompt" : "Watch Trailer",
-            "buttonAddress" : "https://www.amazon.com/dp/B013WF1Z4O?autoplaytrailer=1"
+            "buttonAddress" : "https://www.amazon.com/dp/B013WF1Z4O?autoplaytrailer=1",
+            "frameCount" : 3497
         },
         {
             "title" : "X-Men Origins: Wolverine (2009)",
@@ -23,7 +25,8 @@
             "producers" : "Marvel Entertainment, The Donners' Company, Seed Productions",
             "directors" : "directed by Gavin Hood",
             "buttonPrompt" : "Watch Trailer",
-            "buttonAddress" : "https://www.amazon.com/dp/B00DU70TN8?autoplaytrailer=1"
+            "buttonAddress" : "https://www.amazon.com/dp/B00DU70TN8?autoplaytrailer=1",
+            "frameCount" : 3223
         },
         {
             "title" : "Avatar (2009)",
@@ -31,7 +34,8 @@
             "producers" : "Lightstorm Entertainment, Dune Entertainment, Ingenious Film Partners",
             "directors" : "directed by James Cameron",
             "buttonPrompt" : "Watch Trailer",
-            "buttonAddress" : "https://www.amazon.com/dp/B003EVWDR0?autoplaytrailer=1"
+            "buttonAddress" : "https://www.amazon.com/dp/B003EVWDR0?autoplaytrailer=1",
+            "frameCount" : 4853
         }
     ]
 }

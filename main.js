@@ -20,26 +20,20 @@ app.use('/public', express.static('static'));
 
 // make sure files/directories configured correctly
 //
-var moviesManifest = process.env.MOVIES_MANIFEST;
-if (moviesManifest === undefined) {
-    console.log("MOVIES_MANIFEST not specified, defaulting to ./movies/metadata.json");
-    moviesManifest = "./metadata/movies.json";
-}
-if (!pathExists.sync(moviesManifest)) {
-    console.error("unable to find movie manifest: " + moviesManifest);
-    // process.exit(1);
-}
+var moviesManifest = './metadata/movies.json';
 
-var picsDir = process.env.PICS_DIR;
-// var picsDir = "http://stillsdb-f58.kxcdn.com/";
-
+if (moviesManifest === undefined)   {
+    console.warn('moviesManifested is undefined; something has gone horribly wrong');
+    process.exit(1);
+}   else {
+    // console.log('moviesManifest: ' + moviesManifest);
+}
+var picsDir = "http://stillsdb-f58.kxcdn.com/";
 if (picsDir === undefined) {
     console.error("no PICS_DIR specified, exiting...");
-    // process.exit(1);
-}
-if (!pathExists.sync(picsDir)) {
-    console.error("unable find to pic dir: "  + picsDir)
-    // process.exit(1);
+    process.exit(1);
+}   else {
+    // console.log('picsDir: ' + picsDir);
 }
 
 // process movies (create preview images)
@@ -57,46 +51,55 @@ function sortByTitle(a,b)   {
     return 0;
 }
 movieMetadata.movies.sort(sortByTitle);
+// so here contents is the movies.json object only once
 
-// TODO make network question to get manifest.json
 
+// somewhere it's not requesting the individual paths for the image,
+// it's requesting the path
 var movieByEncodedTitle = {}
+
 for (var i = 0; i < movieMetadata.movies.length; i++) {
     let movie = movieMetadata.movies[i];
-    movieByEncodedTitle[movie["title_encoded"]] = movie;
+    movieByEncodedTitle[movie['title_encoded']] = movie;
 
     let movieDir = path.join(picsDir, movie['title_encoded'], "hq")
     let moviePreviewDir = path.join(picsDir, movie['title_encoded'], "preview");
-    if (!pathExists.sync(moviePreviewDir)) {
-        console.warn(moviePreviewDir + " does not exist");
-        delete movieByEncodedTitle[movie["title_encoded"]];
-        continue;
-    }
     let movieThumbnailDir = path.join(picsDir, movie['title_encoded'], "thumbnail");
-    if (!pathExists.sync(movieThumbnailDir)) {
-        console.warn(movieThumbnailDir + " does not exist");
-        delete movieByEncodedTitle[movie["title_encoded"]];
-        continue;
-    }
 
-    if (!pathExists.sync(movieDir)) {
-        console.warn("unable to find pic for for '" + movie['title_encoded'] + "', skipping");
-        delete movieByEncodedTitle[movie["title_encoded"]];
-        continue;
-    }
-    let files = fs.readdirSync(movieDir);
+    // manifest object ...
+    // old code: let files = fs.readdirSync(movieDir);
+    // readdirSync returns an array of filenames, so files was an array of all the files in /avatar/hq
+    // so I need to let files be the files array inside the json object
+    // let files = fs.readdirSync('./manifest');
+    // for (var j = 0; j < files.length; j++)  {
+    //     let file = path.join('./manifest' , files[j]);
+    //     let fileContents = fs.readFileSync(file);
+    //     let movieFiles = JSON.parse(fileContents.toString());
+    //     console.log(movieFiles['files'].length);
+    // }
+
     movie['previewPaths'] = [];
     movie['thumbnailPaths'] = [];
     movie['hqPaths'] = [];
-    for (let i in files) {
-        let file = files[i];
-        let picPath = path.join(movieDir, file);
-        let previewPath = path.join(moviePreviewDir, file);
-        previewPath = previewPath.replace(".png", ".jpg");
-        let thumbnailPath = path.join(movieThumbnailDir, file);
-        thumbnailPath = thumbnailPath.replace(".png", ".jpg");
 
-    // TODO make sure for every hq image the preview and thumbnail exist
+    function numberFormatter(input)   {
+        var x = "" + input;
+        while (x.length < 4)    {
+            x = '0' + x;
+        }
+        return x;
+    }
+
+    var movieFrames = movie['frameCount'];
+    for (var j = 0; j < movieFrames; j++) {
+        let number = j;
+        let fileNumber = numberFormatter(number);
+        let pngTailFile = fileNumber + ".png";
+        let jpgTailFile = fileNumber + ".jpg";
+        let picPath = path.join(movieDir, pngTailFile);
+        let previewPath = path.join(moviePreviewDir, jpgTailFile);
+        let thumbnailPath = path.join(movieThumbnailDir, jpgTailFile);
+
         let relativeHqPath = path.relative(picsDir, picPath);
         movie['hqPaths'].push(relativeHqPath);
         let relativePreviewPath = path.relative(picsDir, previewPath);
@@ -105,6 +108,25 @@ for (var i = 0; i < movieMetadata.movies.length; i++) {
         movie['thumbnailPaths'].push(relativeThumbnailPath);
     }
 }
+
+/*
+    for (let i in files) {
+        let file = files[i];
+        let picPath = path.join(movieDir, file);
+        let previewPath = path.join(moviePreviewDir, file);
+        previewPath = previewPath.replace(".png", ".jpg");
+        let thumbnailPath = path.join(movieThumbnailDir, file);
+        thumbnailPath = thumbnailPath.replace(".png", ".jpg");
+
+        let relativeHqPath = path.relative(picsDir, picPath);
+        movie['hqPaths'].push(relativeHqPath);
+        let relativePreviewPath = path.relative(picsDir, previewPath);
+        movie['previewPaths'].push(relativePreviewPath);
+        let relativeThumbnailPath = path.relative(picsDir, thumbnailPath);
+        movie['thumbnailPaths'].push(relativeThumbnailPath);
+    }
+}
+*/
 
 app.set('view engine', 'html');
 app.engine('html', ejs.renderFile);
@@ -160,5 +182,5 @@ function onRequestFile(req, res) {
 }
 
 app.listen(3000, function () {
-  console.log('Example app listening on port 3000!');
+  console.log('StillsDB main.js listening on port 3000!');
 });
